@@ -25,6 +25,7 @@ let teacher =null;
 
 const initTeacherModel=async()=>{
     try{
+        if(teacher)return teacher;
         teacher=mongoose.model("teachermodel",teacherModel); //teachermodel table is created in database
         return teacher;
     }

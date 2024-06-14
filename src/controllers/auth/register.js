@@ -47,6 +47,18 @@ router.post("/",async(req,res)=>{
                 message:"email "+response.message,
             });
         }
+        const isextistingEmail =await teacherModel.find({
+            is_Active:constants.STATE.ACTIVE,
+            email:email,
+        })
+        // console.log(isextistingEmail);
+        if(isextistingEmail.length>0){
+            response=RESPONSE.ALREADY_EXSITS;
+            return res.json({           //sending data using json format
+                code:response.code,
+                message:"email "+response.message,
+            });
+        }
         const isValidPhone=validator.isMobilePhone(phone)&& phone.toString().length==10;;
         console.log(isValidPhone);
         if(isValidPhone==false){
@@ -56,8 +68,20 @@ router.post("/",async(req,res)=>{
                 message:"phone "+response.message,
             });
         }
+        const isextistingPhone =await teacherModel.find({
+            is_Active:constants.STATE.ACTIVE,
+            phone:phone,
+        })
+        // console.log(isextistingPhone);
+        if(isextistingPhone.length>0){
+            response=RESPONSE.ALREADY_EXSITS;
+            return res.json({           //sending data using json format
+                code:response.code,
+                message:"phone "+response.message,
+            });
+        }
         const encryptedPassword =await bcrypt.hash(password,constants.HASH_ROUND);
-        console.log(encryptedPassword);
+        // console.log(encryptedPassword);
         await teacherModel.create({
             teacher_name:teacher_name,
             email:email,
