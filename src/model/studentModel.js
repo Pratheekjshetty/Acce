@@ -10,7 +10,7 @@ const studentModel={
     },
     image:{
         type:[String],
-        data:buffer,
+        // data:buffer,
         required:true,
     },
     teacher_id:{
