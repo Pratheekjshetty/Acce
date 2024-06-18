@@ -34,6 +34,7 @@ router.post("/",authenticate, async(req,res)=>{
                 const studentModel=await initStudentModel()
                 const {student_name,rollno}=req.body;
                 const teacher_id=req.user.id;
+                console.log(req.user);
                 if(!student_name||student_name==""){
                     response=RESPONSE.MANDATORY_PARAMS;
                     return res.json({

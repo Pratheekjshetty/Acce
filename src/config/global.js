@@ -26,5 +26,9 @@ export const RESPONSE={
     MULTER_ERR:{
         code:"205",
         message:"file size is exceeded",
+    },
+    NOT_FOUND:{
+        code:"206",
+        message:"not found",
     }
 }

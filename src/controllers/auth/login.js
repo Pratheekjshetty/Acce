@@ -41,7 +41,7 @@ router.post("/",async(req,res)=>{
         console.log(data);
         if(data&&(await bcrypt.compare(password,data.password))){
             const token=jwt.sign({
-                id:data.__id,
+                id:data._id,
                 name:data.teacher_name,
             },
             process.env.TOKENKEY
