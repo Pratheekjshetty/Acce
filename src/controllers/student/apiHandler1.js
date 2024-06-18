@@ -13,4 +13,7 @@ router.use("/list_student_by_id",listStudentbyId);
 import list from './list.js'
 router.use("/list",list);
 
+import list2 from './list2.js'
+router.use("/list2",list2);
+
 export default router;
