@@ -29,4 +29,7 @@ router.use("/delete2",delete2);
 import searchStudent from './searchStudent.js'
 router.use("/search_student",searchStudent);
 
+import searchStudent2 from './searchStudent2.js'
+router.use("/search_student2",searchStudent2);
+
 export default router;
