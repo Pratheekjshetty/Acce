@@ -26,7 +26,7 @@ router.get("/", authenticate, async (req, res) => {
             response = RESPONSE.NOT_FOUND;
             return res.json({
                 code: response.code,
-                message: "students " + response.message,
+                message: "students" + response.message,
             });
         } else {
             data = data.map((item) => ({
