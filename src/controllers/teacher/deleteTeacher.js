@@ -9,8 +9,7 @@ router.put("/:id",async(req,res)=>{
         const teacherModel=await initTeacherModel();
         let response;
         const teacher_id=req.params.id;
-        const{teacher_name,email,password,phone}=req.body;
-    let updates={};
+        
     const isValidId = await teacherModel.findOne({
         _id:teacher_id,
         is_Active:constants.STATE.ACTIVE,
@@ -23,29 +22,17 @@ router.put("/:id",async(req,res)=>{
             message:"ID "+response.message
         });
     }
-    if(teacher_name && teacher_name!=""){
-        updates.teacher_name=teacher_name;
-    }
-    if(email && email!=""){
-        updates.email=email;
-    }
-    if(password && password!=""){
-        updates.password=password;
-    }
-    if(phone && phone!=""){
-        updates.phone=phone;
-    }
-    // console.log(updates);
     await teacherModel.findOneAndUpdate(
         {
             _id:teacher_id,
+            is_Active:constants.STATE.ACTIVE,
         },
-        updates
+        {is_Active:constants.STATE.INACTIVE}
     );
     return res.json(RESPONSE.SUCCESS);
     }
     catch(err){
-        console.log("editteacher",err);
+        console.log("deleteteacher",err);
         return res.json(RESPONSE.UNKNOWN_ERROR);
     }
 })

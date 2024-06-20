@@ -26,4 +26,7 @@ router.use("/list2",list2);
 import delete2 from './delete2.js'
 router.use("/delete2",delete2);
 
+import searchStudent from './searchStudent.js'
+router.use("/search_student",searchStudent);
+
 export default router;
