@@ -3,21 +3,19 @@ const router = express.Router();
 import { RESPONSE } from "../../config/global.js";
 import constants from "../../config/constants.js";
 import authenticate from "../../middleware/authenticate.js";
-import initStudentModel from "../../model/studentModel.js";
+import initTeacherModel from "../../model/teacherModel.js";
 
-router.get("/:search_key", authenticate, async (req, res) => {
+router.get("/:search_key",async (req, res) => {
   try {
     let search_key = req.params.search_key;
-    const studentModel = await initStudentModel();
-    const teacher_id = req.user.id;
+    const teacherModel = await initTeacherModel();
     let response;
 
-    let data = await studentModel.find({
+    let data = await teacherModel.find({
       is_Active: constants.STATE.ACTIVE,
-      teacher_id: teacher_id,
       $or: [
-        { student_name: { $regex: search_key, $options: "i" } },
-        { rollno: { $regex: search_key } },
+        { teacher_name: { $regex: search_key, $options: "i" } },
+        { phone: { $regex: search_key } },
       ],
     });
     if (data.length == 0) {
@@ -29,21 +27,22 @@ router.get("/:search_key", authenticate, async (req, res) => {
     } else {
       data = data.map((item) => {
         return {
-          _id: item._id,
-          student_name: item.student_name,
-          rollno: item.rollno,
-          image: item.image.map((img) => "/uploads/" + img),
+            _id:item._id,
+            teacher_name:item.teacher_name,
+            email:item.email,
+            phone:item.phone,
+            password:item.password,
         };
       });
       response = RESPONSE.SUCCESS;
       return res.json({
         code: response.code,
-        msg: "students " + response.message,
+        msg: "teachers " + response.message,
         data: data,
       });
     }
   } catch (err) {
-    console.log("searchStudent", err);
+    console.log("searchTeacher", err);
     return res.json(RESPONSE.UNKNOWN_ERROR);
   }
 });

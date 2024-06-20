@@ -13,4 +13,7 @@ router.use("/edit_teacher",editTeacher);
 import deleteTeacher from './deleteTeacher.js'
 router.use("/delete_teacher",deleteTeacher);
 
+import searchTeacher from './searchTeacher.js'
+router.use("/search_teacher",searchTeacher);
+
 export default router;
